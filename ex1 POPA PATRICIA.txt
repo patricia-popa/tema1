@@ -1,0 +1,70 @@
+class Employee:
+    """Common base class for all employees"""
+    empCount = 0
+
+    def __init__(self, name, salary, department):
+        self.name = name
+        self.salary = salary
+        self.department = department
+        self.tasks = {}
+        Employee.empCount += 1
+
+    def display_emp_count(self):
+        "Displays the number of employees"
+        print(f"Total number of employee(s) is {Employee.empCount}")
+
+    def display_employee(self):
+        print("Name : ", self.name, ", Salary: ", self.salary, ", Department: ", self.department)
+
+    def __del__(self):
+        Employee.empCount -= 1
+
+    def update_salary(self, new_salary):
+        self.salary = new_salary
+
+    def modify_task(self, task_name, status="New"):
+        self.tasks[task_name] = status
+
+    def display_task(self, status):
+        print(f"Tasks with status {status}:")
+        for name in self.tasks.keys():
+            if self.tasks[name] == status:
+                print(name)
+
+class Manager(Employee):
+    mgr_count = 0
+
+    def __init__(self, name, salary):
+        super().__init__(name, salary, "D06")
+        Manager.mgr_count += 1
+
+    def display_employee(self):
+        print("Name:", self.name, ", Salary:", self.salary, ", Department:", self.department)
+
+manager1 = Manager("Ionescu Ana", 50000)
+manager2 = Manager("Grigore Vasile", 2000)
+manager3 = Manager("Popescu Andrei", 12345)
+manager4 = Manager("Marin Marin", 12555)
+manager5 = Manager("Vasile Vasile", 22222)
+
+manager1.display_employee()
+manager2.display_employee()
+manager3.display_employee()
+manager4.display_employee()
+manager5.display_employee()
+
+print("Manager Count:", Manager.mgr_count)
+
+employee1 = Employee("Ana Maria", 11111, "PR")
+employee2 = Employee("Balan Natalia", 40000, "Dezvoltare Software")
+employee3 = Employee("Moise Marin", 2222, "Servicii pt clienti")
+employee4 = Employee("Ene Vlad", 12345, "Logistica")
+employee5 = Employee("Popa Patricia", 99999999, "Contabilitate")
+
+employee1.display_employee()
+employee2.display_employee()
+employee3.display_employee()
+employee4.display_employee()
+employee5.display_employee()
+
+print("Employee Count:", Employee.empCount)
